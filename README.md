@@ -1,9 +1,19 @@
-# PowerShell Refresher
+# PowerShell Refresher<a name="top"></a>
 
 This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
 
 **Contents**
 1. [Variables](#Variables)
+2. [Strings](#Strings)
+3. [Arrays](#Arrays)
+4. [Hashtables](#Hashtables)
+5. [Branching](#Branching)
+6. [Looping](#Looping)
+7. [Operators](#Operators)
+8. [Output](#Output)
+9. [Functions](#Functions)
+10. [Scripts](#Scripts)
+11. [Comments](#Comments)
 
 ## Variables
 ```powershell
