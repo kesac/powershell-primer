@@ -3,7 +3,7 @@
 This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
 
 **Contents**:
-[Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables)
+[Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) |
 [Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Output](#Output)
 [Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
 
@@ -81,9 +81,12 @@ while($number -ne 0){
 ## Operators
 ```powershell
 -not       # Negation
--and -or   # And, Or
--eq -ne    # Equal to, Not equal to
--gt -lt    # Greater than, Less than
+-and       # Logical And
+-or        # Logical Or
+-eq        # Equal to
+-ne        # Not equal to
+-gt        # Greater than
+-lt        # Less than
 -ge        # Greater than or equal
 -le        # Less than or equal
 -xor       # Exclusive or
