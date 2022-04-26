@@ -2,18 +2,10 @@
 
 This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
 
-**Contents**
-1. [Variables](#Variables)
-2. [Strings](#Strings)
-3. [Arrays](#Arrays)
-4. [Hashtables](#Hashtables)
-5. [Branching](#Branching)
-6. [Looping](#Looping)
-7. [Operators](#Operators)
-8. [Output](#Output)
-9. [Functions](#Functions)
-10. [Scripts](#Scripts)
-11. [Comments](#Comments)
+**Contents**:
+[Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables)
+[Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Output](#Output)
+[Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
 
 ## Variables
 ```powershell
@@ -125,8 +117,10 @@ work 42 # Call function
 ## Scripts
 ```powershell
 $script = "/Path/To/Script.ps1"
+
 # call script
 & $script $arg1 $arg2 
+
 # $args is an implicit array in
 # every script containing arguments
 ```
