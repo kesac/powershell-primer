@@ -2,9 +2,8 @@
 
 This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
 
-**Contents**:
 [Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) |
-[Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Output](#Output)
+[Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Input](#Input) | [Output](#Output) |
 [Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
 
 ## Variables
@@ -93,19 +92,38 @@ while($number -ne 0){
 -contains  # Test if array has item
 -match     # Compare against regex
 ```
+## Input
+```powershell
+# Captures user input as a string
+$name = Read-Host 
+
+# Presents a prompt when capturing user input
+$realname = Read-Host "What is your actual name?"
+
+# Reads the specified file to a variable
+$file = Get-Content "notes.txt"
+
+# This Unix-like alias also works
+$file = cat "notes.txt
+
+```
 
 ## Output
 ```powershell
-echo "display $value in console"
+# Writes a string to the console
+Write-Host "Hello $name"
 
-# Output to file and overwrite that file
-$value > overwritten_file.txt
+# This Unix-like alias also works
+echo "Hello $realname"
 
-# Output to file and append to end of file
-$value >> appended_file.txt
+# Outputs variable to file, overwriting it
+$name > notes.txt
+
+# Appends variable to end of file
+$realname >> notes.txt
 
 # Pipe output to command ‘program’
-$value | program 
+$name | program 
 ```
 
 ## Functions
