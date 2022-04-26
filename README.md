@@ -1,6 +1,9 @@
 # PowerShell Refresher
 
-This is a minimalistic refresher for PowerShell syntax for the occasional user of the language.
+This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
+
+**Contents**
+1. [Variables](#Variables)
 
 ## Variables
 ```powershell
@@ -126,3 +129,6 @@ $script = "/Path/To/Script.ps1"
    comment block
 #>
 ```
+
+## Notes
+This was originally published on my [personal site](https://turtlesort.com/) in 2013.
