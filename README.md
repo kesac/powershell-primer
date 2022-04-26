@@ -110,11 +110,14 @@ $value | program
 
 ## Functions
 ```powershell
-function work([int]$value){
-   return "$value as string"
+function DoWork {
+   param($Name)
+   return "Hello $Name"
 }
 
-work 42 # Call function
+DoWork                # Returns "Hello "
+DoWork -Name "World"  # Returns "Hello World"
+DoWork "World"        # Also returns "Hello World"
 ```
 
 ## Scripts
