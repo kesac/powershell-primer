@@ -1,83 +1,81 @@
-# PowerShell Refresher<a name="top"></a>
-
-This is a minimalistic refresher for PowerShell syntax. It is meant for occasional users of the language who only need to get back into the language periodically. 
+This is a crash course for PowerShell syntax. It serves as a minimalistic refresher for occasional users of the language. 
 
 [Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) |
 [Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Input](#Input) | [Output](#Output) |
 [Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
 
-All example code will execute as-is.
-
 ## Variables
 ```powershell
-$string = "Hello World";  # Variables start with a dollar sign
-$number = 12345           # And semicolons are optional
-
-
-# You can assign the output of Powershell 
-# commands directly to a variable
-$output = Get-Location
+$example = "World";     # Variable names start with a dollar sign
+$digits  = 12345        # Semicolons are optional for single statements
+$output  = Get-Location # You can capture the output of commands in a variable
 ```
 
 ## Strings
 ```powershell
-$name = "World"
-"Hello $name"            # "Hello World"
-'Hello $name'            # "Hello $name"
-"Hello" + "World"        # "HelloWorld"
+$example = "World"        # Declares new string variable
 
-"World".Substring(0, 2)  # Returns "Wo"
-"World".substring(2)     # Method names are not case-sensitive. Returns "rld" 
-"World".Replace("l","")  # Returns "Word"
-"$(2 + 5 * 8)"           # Returns "42"
+"Hello $example"          # Evaluates to Hello World
+'Hello $example'          # Evaluates to Hello $example
+"Hello" + "World"         # Evaluates to HelloWorld
+
+$example.StartsWith("W")  # Evaluates to true
+$example.Contains("or")   # Evaluates to true
+$example.EndsWith("ld")   # Evaluates to true
+
+$example.Substring(0, 2)  # Evaluates to Wo
+$example.Replace("l","")  # Evaluates to Word
 ```
 
 ## Arrays
 ```powershell
-$array = @()             # Initialize an empty array
-$array = $array + "A"    # Array now contains element "A"
-$array += "B"            # Array now contains elements "A" and "B"
+$items = @()             # Initializes empty array
+$items = $items + "A"    # Array now contains A
+$items += "B"            # Array now contains A, B
 
-$other = @("C","D","E")
-$array = $array + $other # Array now contains five elements
+$other = @("C","D","E")  # Initialize a non-empty array
+$items = $items + $other # Array now contains A, B, C, D, E
  
-$array[4]                # Gets single value
-$array[1..4]             # Gets subset
-$array.Length            # Gets size of array
+$items[4]                # Returns E
+$items[0..2]             # Returns A, B, C
+$items.Length            # Returns 5
 ```
 
 ## Hashtables
 ```powershell
-$table = @{}             # Initialize an empty hashtable
-$table.planet = 'Earth'
-$table['fruit'] = 'apple'
-$table.Keys              # Gets all keys
-$table.Values            # Gets all values
-$table.Count             # Size of table
+$table = @{}              # Initializes empty hashtable
+$table.Planet = 'Earth'   # Defines new key-value pair 
+$table['Fruit'] = 'Apple' # Also defines new key-value pair
+
+$table.Keys               # Returns Planet, Fruit
+$table.Values             # Returns Earth, Apple
+$table.Count              # Returns 2
 ```
 
 ## Branching
 ```powershell
-if(-not $table){
+if (-not $table) {
    echo "table is not defined"
 }
-elseif($table[$key]){
+elseif ($table[$key]) {
    echo "$key is defined in table"
 }
-else{
+else 
    echo "$key is not defined"
 }
 ```
 
 ## Looping
 ```powershell
-for($i = 1; $i -lt 3; $i += 1){
+for ($i = 0; $i -lt 3; $i += 1) {
    echo $i
 }
-foreach($item in $array){
+
+foreach ($item in $array) {
    echo $item
 }
-while($number -ne 0){
+
+while ($number -ne 0) {
    $number -= 1
 }
 
