@@ -6,11 +6,17 @@ This is a minimalistic refresher for PowerShell syntax. It is meant for occasion
 [Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Input](#Input) | [Output](#Output) |
 [Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
 
+All example code will execute as-is.
+
 ## Variables
 ```powershell
-$number = 1              # Variables start with a dollar sign
-$string = "Hello World"; # Semicolons are optional
-$output = ls             # Captures the output of command 'ls'
+$string = "Hello World";  # Variables start with a dollar sign
+$number = 12345           # And semicolons are optional
+
+
+# You can assign the output of Powershell 
+# commands directly to a variable
+$output = Get-Location
 ```
 
 ## Strings
