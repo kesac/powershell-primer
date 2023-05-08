@@ -6,8 +6,8 @@ This is a crash course for PowerShell syntax. It serves as a minimalistic refres
 
 ## Variables
 ```powershell
-$example = "World";     # Variable names start with a dollar sign
-$digits  = 12345        # Semicolons are optional for single statements
+$example = "World"      # Variable names start with a dollar sign
+$digits  = 12345;       # Semicolons are optional for single statements
 $output  = Get-Location # You can capture the output of commands in a variable
 ```
 
