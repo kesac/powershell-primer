@@ -6,9 +6,9 @@ This is a crash course for PowerShell syntax. It serves as a minimalistic refres
 
 ## Variables
 ```powershell
-$example = "World"      # Variable names start with a dollar sign
-$digits  = 12345;       # Semicolons are optional for single statements
-$output  = Get-Location # You can capture the output of commands in a variable
+$example = "World"        # Variable names start with a dollar sign
+$digits  = 12345;         # Semicolons are optional for single statements
+$output  = Get-Location   # You can capture the output of commands in a variable
 ```
 
 ## Strings
@@ -29,16 +29,16 @@ $example.Replace("l","")  # Evaluates to Word
 
 ## Arrays
 ```powershell
-$items = @()             # Initializes empty array
-$items = $items + "A"    # Array now contains A
-$items += "B"            # Array now contains A, B
+$items = @()              # Initializes empty array
+$items = $items + "A"     # Array now contains A
+$items += "B"             # Array now contains A, B
 
-$other = @("C","D","E")  # Initialize a non-empty array
-$items = $items + $other # Array now contains A, B, C, D, E
+$other = @("C","D","E")   # Initialize a non-empty array
+$items = $items + $other  # Array now contains A, B, C, D, E
  
-$items[4]                # Returns E
-$items[0..2]             # Returns A, B, C
-$items.Length            # Returns 5
+$items[4]                 # Returns E
+$items[0..2]              # Returns A, B, C
+$items.Length             # Returns 5
 ```
 
 ## Hashtables
