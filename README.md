@@ -1,166 +1,201 @@
-This is a crash course for PowerShell syntax. It serves as a minimalistic refresher for occasional users of the language. 
+## Contents
+This is a crash course for using PowerShell. It serves as a refresher for occasional users of the language. 
 
-[Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) |
-[Branching](#Branching) | [Looping](#Looping) | [Operators](#Operators) | [Input](#Input) | [Output](#Output) |
+[Quick Start](#Quick-Start)  | [Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) | [Input](#Input) | [Output](#Output) |
+[Basic Operators](#Basic-Operators) | [Branching](#Branching) | [Looping](#Looping) | 
 [Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
+
+## Quick Start
+To access PowerShell:
+- Run the _Windows PowerShell_ app for a command line interface 
+- Or launch _Windows PowerShell ISE_ for an editor
 
 ## Variables
 ```powershell
-$example = "World"        # Variable names start with a dollar sign
-$digits  = 12345;         # Semicolons are optional for single statements
-$output  = Get-Location   # You can capture the output of commands in a variable
+$example = "World";       # Variable names start with $
+$digits  = 12345          # Semicolons are optional
+$output  = Get-Help       # Variables also store the output of commands
 ```
 
 ## Strings
 ```powershell
-$example = "World"        # Declares new string variable
+# Initialization
+$example = "World"        # Quotes make strings
+$example = 'World'        # Single quotes make strings too
 
-"Hello $example"          # Evaluates to Hello World
-'Hello $example'          # Evaluates to Hello $example
-"Hello" + "World"         # Evaluates to HelloWorld
+"Hello $example"          # This becomes 'Hello World'
+'Hello $example'          # But this stays as 'Hello $example'
 
-$example.StartsWith("W")  # Evaluates to true
-$example.Contains("or")   # Evaluates to true
-$example.EndsWith("ld")   # Evaluates to true
+# Operations
+"Hello" + $example        # Use '+' to join strings
+$example.Substring(0, 2)  # Strings have methods. This returns 'Wo'
+$example.Replace("l","")  # And this returns 'Word'
 
-$example.Substring(0, 2)  # Evaluates to Wo
-$example.Replace("l","")  # Evaluates to Word
+# Comparison
+$example.StartsWith("W")  # Returns true
+$example.Contains("or")   # Returns true too
+$example.EndsWith("ld")   # Returns true as well
 ```
 
 ## Arrays
 ```powershell
-$items = @()              # Initializes empty array
-$items = $items + "A"     # Array now contains A
-$items += "B"             # Array now contains A, B
+# Initialization
+$items = @()              # Creates an empty array
+$stock = @("C","D","E")   # Creates an array with existing elements
+$stock.Length             # Returns 3
+$stock[0]                 # Returns 'C'
 
-$other = @("C","D","E")   # Initialize a non-empty array
-$items = $items + $other  # Array now contains A, B, C, D, E
- 
-$items[4]                 # Returns E
-$items[0..2]              # Returns A, B, C
-$items.Length             # Returns 5
+# Operations
+$items = $items + "A"     # This adds 'A' to the empty array
+$items += "B"             # This adds 'B'
+$items += $stock          # Array now has 'A', 'B', 'C', 'D', 'E'
+$items -contains "C"      # Returns true
 ```
 
 ## Hashtables
 ```powershell
-$table = @{}              # Initializes empty hashtable
-$table.Planet = 'Earth'   # Defines new key-value pair 
-$table['Fruit'] = 'Apple' # Also defines new key-value pair
+# Initialization
+$table = @{}               # Creates an empty hashtable
+$table.Planet = 'Earth'    # Adds a key-value pair 
+$table['Dog'] = 'Corgi'    # Also adds a key-value pair
 
-$table.Keys               # Returns Planet, Fruit
-$table.Values             # Returns Earth, Apple
-$table.Count              # Returns 2
+$table = @{                # Creates a hashtable with existing items
+    Planet = 'Earth';      # Semicolons are needed to separate items here
+    Dog    = 'Corgi';
+}
+
+# Properties
+$table.Keys                # Returns Planet, Dog
+$table.Values              # Returns Earth, Corgi
+$table.Count               # Returns 2
+$table.ContainsKey('Dog')  # Returns true
+```
+
+## Input
+```powershell
+$data = Read-Host              # Captures user input
+$data = Get-Content notes.txt  # Captures contents of a file
+$data = cat notes.txt          # This Unix-like alias also works
+$data = cat "notes.txt"        # Quotes around the filename works too
+```
+
+## Output
+```powershell
+Write-Host $data      # Writes to console
+echo $data            # This alias also writes to console
+$data >> notes.txt    # Writes to a file, appending to it
+$data > notes.txt     # Writes to a file, overwriting it
+$data | Some-Command  # Pipes to a PowerShell command
+```
+
+## Basic Operators
+```powershell
++     # Addition, joining, concatenation
+++    # Increment by 1
+-     # Subtraction, number negation
+--    # Decrement by 1
+*     # Multiplication, repeater
+/     # Division
+%     # Modulo
+-not  # Logical negation
+-and  # Logical And
+-or   # Logical Or
+-eq   # Equal to
+-ne   # Not equal to
+-gt   # Greater than
+-lt   # Less than
+-ge   # Greater than or equal
+-le   # Less than or equal
+
+# Examples
+$value = (28 / 2) * 3   # Evaluates to 42 
+$value -eq 42           # Returns true
+-not ($value -eq 42)    # Returns false
 ```
 
 ## Branching
 ```powershell
 if (-not $table) {
-   echo "table is not defined"
+    echo "table is not defined"
 }
 elseif ($table[$key]) {
-   echo "$key is defined in table"
+    echo "$key is defined in table"
 }
 else 
-   echo "$key is not defined"
+    echo "$key is not defined"
 }
 ```
 
 ## Looping
 ```powershell
-for ($i = 0; $i -lt 3; $i += 1) {
-   echo $i
+# The classic for-loop works
+for ($i = 0; $i -lt 10; $i++) {
+    echo $i
 }
 
+# A foreach-loop works for arrays
 foreach ($item in $array) {
-   echo $item
+    echo $item
 }
 
-while ($number -ne 0) {
-   $number -= 1
+# Classic while-loop also works
+while ($number -lt 10) {
+    $number++
 }
 
-```
-
-## Operators
-```powershell
--not       # Negation
--and       # Logical And
--or        # Logical Or
--eq        # Equal to
--ne        # Not equal to
--gt        # Greater than
--lt        # Less than
--ge        # Greater than or equal
--le        # Less than or equal
--xor       # Exclusive or
--contains  # Test if array has item
--match     # Compare against regex
-```
-## Input
-```powershell
-# Captures user input as a string
-$name = Read-Host 
-
-# Presents a prompt when capturing user input
-$realname = Read-Host "What is your actual name?"
-
-# Reads the specified file to a variable
-$file = Get-Content "notes.txt"
-
-# This Unix-like alias also works
-$file = cat "notes.txt
-
-```
-
-## Output
-```powershell
-# Writes a string to the console
-Write-Host "Hello $name"
-
-# This Unix-like alias also works
-echo "Hello $realname"
-
-# Outputs variable to file, overwriting it
-$name > notes.txt
-
-# Appends variable to end of file
-$realname >> notes.txt
-
-# Pipe output to command ‘program’
-$name | program 
+# Less popular do-loop also works
+do {
+    $number--
+} while($number -gt 0)
 ```
 
 ## Functions
 ```powershell
-function DoWork {
-   param($Name)
-   return "Hello $Name"
+# Declares a basic function
+function Show-Message { 
+    echo "Hello World"
 }
 
-DoWork                # Returns "Hello "
-DoWork -Name "World"  # Returns "Hello World"
-DoWork "World"        # Also returns "Hello World"
+# Call the function using its name
+Show-Message  
+
+# Declares a function with arguments and a return value
+function Get-Message {
+    param(
+        $Greeting,
+        $Name
+    )         
+    return "$Greeting $Name"
+}
+
+# Call the function with arguments
+Get-Message -Greeting "Hello" -Name "World"
+
+# Using positional arguments also works
+Get-Message "Hello" "World"
 ```
 
 ## Scripts
 ```powershell
+# When calling other scripts, you'll need
+# to know their location
 $script = "/Path/To/Script.ps1"
 
-# call script
+# Then to call the script use the & operator
 & $script $arg1 $arg2 
-
-# $args is an implicit array in
-# every script containing arguments
 ```
 
 ## Comments
 ```powershell
-# single line comment
+# This is a single line comment.
+# And here is another single line comment.
+
 <#
-   This is a multi-line
-   comment block
+   This is a multi-line comment block.
+   Everything inside this block will
+   be ignored!
 #>
 ```
 
 ## Notes
-This was originally published on my [personal site](https://turtlesort.com/) in 2013.
+This was originally published on my [personal site](https://turtlesort.com/) in 2013. Last updated November 2023.
