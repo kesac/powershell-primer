@@ -1,23 +1,23 @@
-## Contents
-This is a crash course for using PowerShell. It serves as a refresher for occasional users of the language. 
+# Overview
+- This is a primer for casual users of PowerShell
+- It serves as a refresher for basic syntax
+- Reading time is 60 seconds or less
+---
+### Contents
+- 🚀 [1.Variables](#Variables) | [2.Strings](#Strings) | [3.Arrays](#Arrays) | [4.Hashtables](#Hashtables) 
+- 💬 [5.Input](#Input) | [6.Output](#Output)
+- 🔢 [7.Basic Operators](#Basic-Operators) | [8.Branching](#Branching) | [9.Looping](#Looping) 
+- 🛠 [10.Functions](#Functions) | [11.Scripts](#Scripts) | [12.Comments](#Comments)
 
-[Quick Start](#Quick-Start)  | [Variables](#Variables) | [Strings](#Strings) | [Arrays](#Arrays) | [Hashtables](#Hashtables) | [Input](#Input) | [Output](#Output) |
-[Basic Operators](#Basic-Operators) | [Branching](#Branching) | [Looping](#Looping) | 
-[Functions](#Functions) | [Scripts](#Scripts) | [Comments](#Comments)
-
-## Quick Start
-To access PowerShell:
-- Run the _Windows PowerShell_ app for a command line interface 
-- Or launch _Windows PowerShell ISE_ for an editor
-
-## Variables
+---
+### 1. Variables
 ```powershell
 $example = "World";       # Variable names start with $
 $digits  = 12345          # Semicolons are optional
 $output  = Get-Help       # Variables also store the output of commands
 ```
-
-## Strings
+---
+### 2. Strings
 ```powershell
 # Initialization
 $example = "World"        # Quotes make strings
@@ -36,8 +36,8 @@ $example.StartsWith("W")  # Returns true
 $example.Contains("or")   # Returns true too
 $example.EndsWith("ld")   # Returns true as well
 ```
-
-## Arrays
+---
+### 3. Arrays
 ```powershell
 # Initialization
 $items = @()              # Creates an empty array
@@ -51,8 +51,8 @@ $items += "B"             # This adds 'B'
 $items += $stock          # Array now has 'A', 'B', 'C', 'D', 'E'
 $items -contains "C"      # Returns true
 ```
-
-## Hashtables
+---
+### 4. Hashtables
 ```powershell
 # Initialization
 $table = @{}               # Creates an empty hashtable
@@ -70,16 +70,16 @@ $table.Values              # Returns Earth, Corgi
 $table.Count               # Returns 2
 $table.ContainsKey('Dog')  # Returns true
 ```
-
-## Input
+---
+### 5. Input
 ```powershell
-$data = Read-Host              # Captures user input
+$data = Read-Host              # Captures user input from console
 $data = Get-Content notes.txt  # Captures contents of a file
 $data = cat notes.txt          # This Unix-like alias also works
 $data = cat "notes.txt"        # Quotes around the filename works too
 ```
-
-## Output
+---
+### 6. Output
 ```powershell
 Write-Host $data      # Writes to console
 echo $data            # This alias also writes to console
@@ -87,69 +87,76 @@ $data >> notes.txt    # Writes to a file, appending to it
 $data > notes.txt     # Writes to a file, overwriting it
 $data | Some-Command  # Pipes to a PowerShell command
 ```
-
-## Basic Operators
+---
+### 7. Basic Operators
 ```powershell
-+     # Addition, joining, concatenation
-++    # Increment by 1
--     # Subtraction, number negation
---    # Decrement by 1
-*     # Multiplication, repeater
-/     # Division
-%     # Modulo
--not  # Logical negation
--and  # Logical And
--or   # Logical Or
--eq   # Equal to
--ne   # Not equal to
--gt   # Greater than
--lt   # Less than
--ge   # Greater than or equal
--le   # Less than or equal
+# The usual math operators exist
+$value = (5 + 3) - 1  # Evaluates to 7
+$value = (6 / 3) * 2  # Evaluates to 4
+$value = 10 % 4       # Evaluates to 2 (modulo)
 
-# Examples
-$value = (28 / 2) * 3   # Evaluates to 42 
-$value -eq 42           # Returns true
--not ($value -eq 42)    # Returns false
+# Incrementing/decrementing
+$value++   # Goes up by 1
+$value--   # Goes down by 1
+
+# Operators for equality and boolean logic
+$value -gt 0            # True if $value is a positive number
+$value -eq 42           # True if $value is 42
+!($value -eq 42)    # Negation for previous statement
+
+# Commonly used operators
+-and     # Logical And
+-or      # Logical Or
+-not, !  # Negation
+-eq      # Equal to
+-ne      # Not equal to
+-gt      # Greater than
+-lt      # Less than
+-ge      # Greater than or equal
+-le      # Less than or equal
 ```
-
-## Branching
+---
+### 8. Branching
 ```powershell
-if (-not $table) {
-    echo "table is not defined"
+# The usual if-else statements will work, but 
+# in this language, 'elseif' has no space in it
+
+if (-not $value) {
+    # Executed if $value is not defined
 }
-elseif ($table[$key]) {
-    echo "$key is defined in table"
+elseif (($value % 14) -eq 0) {
+    # Executed if $value is divisible by 14
 }
-else 
-    echo "$key is not defined"
+else {
+    # Executed if no other condition matched
 }
 ```
-
-## Looping
+---
+### 9. Looping
 ```powershell
-# The classic for-loop works
+# This language supports the classic for-loop
+# plus the foreach-loop as a bonus
+
 for ($i = 0; $i -lt 10; $i++) {
     echo $i
 }
 
-# A foreach-loop works for arrays
 foreach ($item in $array) {
     echo $item
 }
 
-# Classic while-loop also works
+# Classic while-loops and do-loops also work
+
 while ($number -lt 10) {
     $number++
 }
 
-# Less popular do-loop also works
 do {
     $number--
 } while($number -gt 0)
 ```
-
-## Functions
+---
+### 10. Functions
 ```powershell
 # Declares a basic function
 function Show-Message { 
@@ -159,7 +166,7 @@ function Show-Message {
 # Call the function using its name
 Show-Message  
 
-# Declares a function with arguments and a return value
+# Defines a function with arguments and a return value
 function Get-Message {
     param(
         $Greeting,
@@ -174,18 +181,18 @@ Get-Message -Greeting "Hello" -Name "World"
 # Using positional arguments also works
 Get-Message "Hello" "World"
 ```
-
-## Scripts
+---
+### 11. Scripts
 ```powershell
-# When calling other scripts, you'll need
-# to know their location
-$script = "/Path/To/Script.ps1"
+# Use the & operator to execute scripts
+$script = "/Path/To/Script.ps1" 
+& $script
 
-# Then to call the script use the & operator
-& $script $arg1 $arg2 
+# Like functions, scripts can accept arguments
+& $script -Greeting "Hello" -Name "World"
 ```
-
-## Comments
+---
+### 12. Comments
 ```powershell
 # This is a single line comment.
 # And here is another single line comment.
@@ -196,6 +203,5 @@ $script = "/Path/To/Script.ps1"
    be ignored!
 #>
 ```
-
-## Notes
-This was originally published on my [personal site](https://turtlesort.com/) in 2013. Last updated November 2023.
+---
+### And you're done!
