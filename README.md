@@ -1,13 +1,13 @@
 # Overview
 - This is a primer for casual users of PowerShell
 - It serves as a refresher for basic syntax
-- Reading time is 60 seconds or less
+- Reading time: 60 seconds
 ---
 ### Contents
-- 🚀 [1.Variables](#Variables) | [2.Strings](#Strings) | [3.Arrays](#Arrays) | [4.Hashtables](#Hashtables) 
-- 💬 [5.Input](#Input) | [6.Output](#Output)
-- 🔢 [7.Basic Operators](#Basic-Operators) | [8.Branching](#Branching) | [9.Looping](#Looping) 
-- 🛠 [10.Functions](#Functions) | [11.Scripts](#Scripts) | [12.Comments](#Comments)
+- 🚀 [1.Variables](#1-Variables) | [2.Strings](#2-Strings) | [3.Arrays](#3-Arrays) | [4.Hashtables](#4-Hashtables) 
+- 💬 [5.Input](#5-Input) | [6.Output](#6-Output)
+- 🔢 [7.Basic Operators](#7-Basic-Operators) | [8.Branching](#8-Branching) | [9.Looping](#9-Looping) 
+- 🛠 [10.Functions](#10-Functions) | [11.Scripts](#11-Scripts) | [12.Comments](#12-Comments)
 
 ---
 ### 1. Variables
@@ -56,11 +56,12 @@ $items -contains "C"      # Returns true
 ```powershell
 # Initialization
 $table = @{}               # Creates an empty hashtable
+
 $table.Planet = 'Earth'    # Adds a key-value pair 
 $table['Dog'] = 'Corgi'    # Also adds a key-value pair
 
-$table = @{                # Creates a hashtable with existing items
-    Planet = 'Earth';      # Semicolons are needed to separate items here
+$table = @{                # Same as everything above, but combined
+    Planet = 'Earth';      # Semicolons are needed to separate pairs here
     Dog    = 'Corgi';
 }
 
@@ -185,6 +186,9 @@ Get-Message "Hello" "World"
 ### 11. Scripts
 ```powershell
 # Use the & operator to execute scripts
+& "/Path/To/Script.ps1"
+
+# This would work too:
 $script = "/Path/To/Script.ps1" 
 & $script
 
@@ -198,7 +202,7 @@ $script = "/Path/To/Script.ps1"
 # And here is another single line comment.
 
 <#
-   This is a multi-line comment block.
+   Here is a multi-line comment block.
    Everything inside this block will
    be ignored!
 #>
