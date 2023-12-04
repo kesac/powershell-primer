@@ -124,21 +124,48 @@ ls "/Folder/" -r | ? { !$_.PSIsContainer } | Select-String "substring"
 ```
 
 ## Using Hashtables as Pseudo Objects
-If your data file is not in JSON or CSV format, you can load them in as hashtables 
+Pretend a `data.txt` file contains the following data with duplicate IDs:
+```
+Fruit:Apple:Red:1205781234
+Fruit:Banana:Yellow:1506777267
+Fruit:Grape:Purple:1873161441
+Fruit:Banana:Yellow:1506777267
+Fruit:Mango:Yellow:1628450950
+Fruit:Apple:Red:1205781234
+Fruit:Banana:Yellow:1506777267
+Fruit:Grape:Purple:1873161441
+```
+
+You can capture the data into pseudo objects using hash tables to ignore duplicates:
 ```powershell
-# Basically, creating hashtables of hashtables
-# Converting hashtables to JSON or CSV
+$fruit = @{}
+
+Get-Content "data.txt" | ForEach-Object {
+	$tokens = $_.Split(':') 
+	$id = $tokens[3]
+	
+	if(-not $fruit[$id]){
+		$fruit[$id] = @{
+			Name = $tokens[1];
+			Color = $tokens[2];
+			Id = $id
+		}
+	}
+	else{
+		echo "Duplicate ignored: $id"
+	}
+}
+
+$fruit.Values | ForEach-Object {
+	# Process each unique fruit here
+	echo "$($_.Name) is $($_.Color)"
+}
 ```
 
 ## Using custom .NET objects
 ```powershell
 # Instantiating an object
 # Converting a hashtable into an object
-```
-
-## Detecting duplicate IDs in a TXT/CSV/JSON file
-```powershell
-# Using a hashtable to detect key collisions to detect dupes
 ```
 
 ## Writing arrays and hashtables to disk
